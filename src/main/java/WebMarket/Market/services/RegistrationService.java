@@ -1,0 +1,33 @@
+package WebMarket.Market.services;
+
+import WebMarket.Market.DTO.UserDTO;
+import WebMarket.Market.models.User;
+import WebMarket.Market.repositories.UserRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class RegistrationService {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
+
+    @Autowired
+    public RegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
+    }
+
+    @Transactional
+    public void registerUser(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO, User.class);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole("ROLE_USER");
+        userRepository.save(user);
+    }
+}

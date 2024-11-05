@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление товара</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{addNew}" th:object="${newGood}">
+    <label for="good_name"> Введите название продукта</label>
+    <input type="text" th:field="*{goods_name}" id="good_name">
+    <br/>
+    <label for="good_type">Введите тип продукта</label>
+    <input type="text" th:field="*{goods_type}" id="good_type">
+    <br/>
+    <label for="good_description">Введите описание продукта</label>
+    <input type="text" th:field="*{goods_description}" id="good_description">
+    <br/>
+    <label for="goods_in_stock">Введите предварительно количество количпество товара</label>
+    <input type="text" th:field="*{goods_in_stock}" id="goods_in_stock">
+    <br/>
+    <input type="submit" th:value="Подтвердить">
+</form>
+</body>
+</html>
