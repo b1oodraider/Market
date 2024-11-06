@@ -31,7 +31,7 @@ public class SecurityController {
 
     @GetMapping("/registration")
     public String registration(@ModelAttribute("user") UserDTO userDTO) {
-        return "registration";
+        return "login/registration";
     }
 
     @PostMapping("/registration")
@@ -39,7 +39,7 @@ public class SecurityController {
                                BindingResult bindingResult) {
         userRegValidator.validate(userDTO, bindingResult);
         if(bindingResult.hasErrors()) {
-            return "registration";
+            return "login/registration";
         }
         registrationService.registerUser(userDTO);
         return "redirect:/secure/login";

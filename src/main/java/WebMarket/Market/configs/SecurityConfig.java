@@ -25,7 +25,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(req->req.requestMatchers("/hello","/login/**","/secure/registration", "/error", "/stock*/?*").permitAll())
+        http.authorizeHttpRequests(req->req.requestMatchers("/hello","/login/**","/secure/registration", "/error", "/stock*", "/stock/[0-9]+").permitAll())
                 .formLogin(log->log.loginPage("/secure/login").permitAll()
                         .loginProcessingUrl("/secure/processing_login").permitAll()
                         .defaultSuccessUrl("/hello", true)
@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req-> req.anyRequest().authenticated())
                 .logout(logout->logout.logoutUrl("/logout")
                         .logoutSuccessUrl("/login"))
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/*", "/stock*/*"));
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/*"));
         return http.build();
     }
 
