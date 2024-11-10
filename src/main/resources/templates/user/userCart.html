@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+</head>
+<body>
+
+<div th:if="${myDBCart != null}" th:each="prod : ${myDBCart}">
+    <p th:text="${prod.getGood.getGoods_description()}"></p>
+    <p th:text="${prod.getGood_count()}"></p>
+</div>
+
+<div th:if="${myDBCart == null}" th:each="prod : ${myLocalCart}">
+    <p th:text="${prod.getGood().getGoods_description() + ' ' + prod.getCount()}"></p>
+</div>
+
+
+
+
+</body>
+</html>

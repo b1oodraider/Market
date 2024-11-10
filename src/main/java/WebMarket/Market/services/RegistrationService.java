@@ -1,7 +1,7 @@
 package WebMarket.Market.services;
 
 import WebMarket.Market.DTO.UserDTO;
-import WebMarket.Market.models.User;
+import WebMarket.Market.models.UserEntity;
 import WebMarket.Market.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class RegistrationService {
 
     @Transactional
     public void registerUser(UserDTO userDTO) {
-        User user = modelMapper.map(userDTO, User.class);
+        UserEntity user = modelMapper.map(userDTO, UserEntity.class);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("ROLE_USER");

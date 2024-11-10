@@ -1,6 +1,6 @@
 package WebMarket.Market.security;
 
-import WebMarket.Market.models.User;
+import WebMarket.Market.models.UserEntity;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,9 +11,9 @@ import java.util.List;
 
 @Getter
 public class UsersDetails implements UserDetails {
-    private final User user;
+    private final UserEntity user;
 
-    public UsersDetails(User user) {
+    public UsersDetails(UserEntity user) {
         this.user = user;
     }
 

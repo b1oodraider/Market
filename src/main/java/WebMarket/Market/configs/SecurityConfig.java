@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -25,15 +24,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(req->req.requestMatchers("/hello","/login/**","/secure/registration", "/error", "/stock*", "/stock/[0-9]+").permitAll())
+        http.authorizeHttpRequests(req->req.requestMatchers("/hello","/login/**","/secure/registration", "/error",
+                "/stock/{spring:[0-9]+}", "/stock", "stock/cart").permitAll())
+                .authorizeHttpRequests(req-> req.requestMatchers("/stock/addNew").hasRole("ADMIN"))
                 .formLogin(log->log.loginPage("/secure/login").permitAll()
                         .loginProcessingUrl("/secure/processing_login").permitAll()
-                        .defaultSuccessUrl("/hello", true)
+                        .defaultSuccessUrl("/hello")
                         .failureUrl("/secure/login?error=true").permitAll())
 
                 .authorizeHttpRequests(req-> req.anyRequest().authenticated())
-                .logout(logout->logout.logoutUrl("/logout")
-                        .logoutSuccessUrl("/login"))
+                .logout(logout->logout.logoutUrl("/secure/logout")
+                        .logoutSuccessUrl("/secure/login"))
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/api/*"));
         return http.build();
     }

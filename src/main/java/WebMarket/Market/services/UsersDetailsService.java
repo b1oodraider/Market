@@ -1,6 +1,6 @@
 package WebMarket.Market.services;
 
-import WebMarket.Market.models.User;
+import WebMarket.Market.models.UserEntity;
 import WebMarket.Market.repositories.UserRepository;
 import WebMarket.Market.security.UsersDetails;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ public class UsersDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
+        Optional<UserEntity> user = userRepository.findByUsername(username);
         return user.map(UsersDetails::new).orElse(null);
     }
 }

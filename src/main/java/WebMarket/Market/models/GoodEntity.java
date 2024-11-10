@@ -1,14 +1,18 @@
 package WebMarket.Market.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="goods")
 @Getter
 @Setter
-public class Good {
+@AllArgsConstructor
+@NoArgsConstructor
+public class GoodEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,14 +24,4 @@ public class Good {
     private Integer goods_in_stock;
     @Column(name="goods_description")
     private String goods_description;
-
-    public Good(String goods_name, String goods_type, Integer goods_in_stock, String goods_description) {
-        this.goods_name = goods_name;
-        this.goods_type = goods_type;
-        this.goods_in_stock = goods_in_stock;
-        this.goods_description = goods_description;
-    }
-
-
-    public Good() {}
 }

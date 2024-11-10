@@ -1,6 +1,6 @@
 package WebMarket.Market.services;
 
-import WebMarket.Market.models.Good;
+import WebMarket.Market.models.GoodEntity;
 import WebMarket.Market.repositories.GoodsRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,17 @@ public class GoodService {
         this.goodsRepository = goodsRepository;
     }
 
-    public void save(Good good) {
+    public void save(GoodEntity good) {
 
         goodsRepository.save(good);
     }
 
-    public List<Good> getAll() {
+    public List<GoodEntity> getAll() {
         return goodsRepository.findAll();
     }
 
-    public Good getById(int id) {
+    public GoodEntity getById(int id) {
+
         return goodsRepository.findById(id).orElse(null);
     }
 }

@@ -1,4 +1,4 @@
-package WebMarket.Market.util;
+package WebMarket.Market.util.Validators;
 
 import WebMarket.Market.DTO.UserDTO;
 import WebMarket.Market.services.UserService;

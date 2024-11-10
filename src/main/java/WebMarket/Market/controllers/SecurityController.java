@@ -2,7 +2,7 @@ package WebMarket.Market.controllers;
 
 import WebMarket.Market.DTO.UserDTO;
 import WebMarket.Market.services.RegistrationService;
-import WebMarket.Market.util.UserRegValidator;
+import WebMarket.Market.util.Validators.UserRegValidator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class SecurityController {
 
     @GetMapping("/registration")
     public String registration(@ModelAttribute("user") UserDTO userDTO) {
-        return "login/registration";
+        return "registration";
     }
 
     @PostMapping("/registration")
@@ -39,7 +39,7 @@ public class SecurityController {
                                BindingResult bindingResult) {
         userRegValidator.validate(userDTO, bindingResult);
         if(bindingResult.hasErrors()) {
-            return "login/registration";
+            return "registration";
         }
         registrationService.registerUser(userDTO);
         return "redirect:/secure/login";

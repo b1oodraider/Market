@@ -8,5 +8,9 @@
 
 <p th:text="${good.getGoods_description()}"></p>
 
+<form th:method="POST" th:action="@{{id}(id=${good.getId()})}" th:object="${good}">
+    <input type="submit" value="Добавить в корзину">
+</form>
+
 </body>
 </html>

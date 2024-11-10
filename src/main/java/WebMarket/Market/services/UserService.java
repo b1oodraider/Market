@@ -1,7 +1,7 @@
 package WebMarket.Market.services;
 
 
-import WebMarket.Market.models.User;
+import WebMarket.Market.models.UserEntity;
 import WebMarket.Market.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +16,19 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
+    public List<UserEntity> findAll() {
         return userRepository.findAll();
     }
 
-    public User findById(int id) {
+    public UserEntity findById(int id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<UserEntity> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public void save(User user) {
+    public void save(UserEntity user) {
         userRepository.save(user);
     }
 
