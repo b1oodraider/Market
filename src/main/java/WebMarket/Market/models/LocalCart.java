@@ -32,9 +32,9 @@ public class LocalCart {
         cart.put(good.getGoods_name(), new CartNode(good, temp));
     }
 
-    public void changeCount(int id, int countDelta) {
+    public void changeCount(int id, int count) {
         GoodEntity good = goodsRepository.findById(id).get();
-        cart.put(good.getGoods_name(), new CartNode(good, countDelta));
+        cart.put(good.getGoods_name(), new CartNode(good, count));
     }
 
     public void removeOne(int id) {

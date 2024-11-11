@@ -1,5 +1,6 @@
 package WebMarket.Market.controllers;
 
+import WebMarket.Market.DTO.DBCartDTO;
 import WebMarket.Market.models.LocalCart;
 import WebMarket.Market.models.GoodEntity;
 import WebMarket.Market.security.UsersDetails;
@@ -47,25 +48,5 @@ public class  GoodsController {
         return "redirect:/stock";
     }
 
-    @PostMapping("/{id}")
-    public String addToCart(@ModelAttribute("good") GoodEntity good) {
-        GoodEntity newGood = goodService.getById(good.getId());
-        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-            UsersDetails usersDetails = (UsersDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            cartService.save(usersDetails.getUser().getId(), newGood, 1);
-        }
-        myLocalCart.add(newGood, 1);
-        return "redirect:/stock";
-    }
 
-    @GetMapping("/cart")
-    public String cart( Model model) {
-        if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-            UsersDetails usersDetails = (UsersDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            model.addAttribute("myDBCart", cartService.getCart(usersDetails.getUser().getId()));
-        } else {
-            model.addAttribute("myLocalCart", myLocalCart.getCart().values().stream().toList());
-        }
-        return "user/userCart";
-    }
 }

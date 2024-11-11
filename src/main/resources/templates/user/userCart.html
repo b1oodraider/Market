@@ -7,12 +7,25 @@
 <body>
 
 <div th:if="${myDBCart != null}" th:each="prod : ${myDBCart}">
-    <p th:text="${prod.getGood.getGoods_description()}"></p>
-    <p th:text="${prod.getGood_count()}"></p>
+    <a th:text="${prod.getGood.getGoods_description() + ' ' + prod.getGood_count()}"></a>
+    <form th:method="POST" th:action="@{cart}">
+        <label th:for="amount1">Изменить количество:</label>
+        <input type="text" id="amount1" name="count" >
+        <input type="hidden" id="good_id" name="good_id" th:value="${prod.getGood().getId()}" >
+        <input type="hidden" id="user_id" name="user_id" th:value="${prod.getUser_id()}" >
+        <input type="submit" value="Изменить">
+    </form>
 </div>
 
 <div th:if="${myDBCart == null}" th:each="prod : ${myLocalCart}">
-    <p th:text="${prod.getGood().getGoods_description() + ' ' + prod.getCount()}"></p>
+    <a th:text="${prod.getGood().getGoods_description() + ' ' + prod.getCount() + '|'}"></a>
+    <form th:method="POST" th:action="@{cart}">
+        <label th:for="amount">Изменить количество:</label>
+        <input type="text" id="amount" name="count" >
+        <input type="hidden" id="goodId" name="good_id" th:value="${prod.getGood().getId()}">
+        <input type="hidden" id="userId" name="user_id" th:value="${-1}">
+        <input type="submit" value="Изменить количество">
+    </form>
 </div>
 
 
