@@ -25,13 +25,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(req->req.requestMatchers("/hello","/login/**","/secure/registration", "/error",
-                "/stock/{spring:[0-9]+}", "/stock", "/stock/cart").permitAll())
+                "/stock/{good_id:[0-9]+}", "/stock", "/stock/cart").permitAll())
                 .authorizeHttpRequests(req-> req.requestMatchers("/stock/addNew").hasRole("ADMIN"))
                 .formLogin(log->log.loginPage("/secure/login").permitAll()
                         .loginProcessingUrl("/secure/processing_login").permitAll()
                         .defaultSuccessUrl("/hello")
                         .failureUrl("/secure/login?error=true").permitAll())
-
                 .authorizeHttpRequests(req-> req.anyRequest().authenticated())
                 .logout(logout->logout.logoutUrl("/secure/logout")
                         .logoutSuccessUrl("/secure/login"))

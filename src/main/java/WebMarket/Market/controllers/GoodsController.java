@@ -1,13 +1,7 @@
 package WebMarket.Market.controllers;
 
-import WebMarket.Market.DTO.DBCartDTO;
-import WebMarket.Market.models.LocalCart;
-import WebMarket.Market.models.GoodEntity;
-import WebMarket.Market.security.UsersDetails;
-import WebMarket.Market.services.CartService;
-import WebMarket.Market.services.GoodService;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import WebMarket.Market.models.ProductEntity;
+import WebMarket.Market.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,38 +9,32 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/stock")
 public class  GoodsController {
-    private final LocalCart myLocalCart;
-    private final GoodService goodService;
-    private final CartService cartService;
+    private final ProductService productService;
 
-    public GoodsController(LocalCart myLocalCart, GoodService goodService, CartService cartService) {
-        this.myLocalCart = myLocalCart;
-        this.goodService = goodService;
-        this.cartService = cartService;
+    public GoodsController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("")
     public String stock(Model model) {
-        model.addAttribute("goods", goodService.getAll());
-        return "goods/stock";
+        model.addAttribute("products", productService.getAll());
+        return "products/stock";
     }
 
     @GetMapping("/{id}")
     public String stock(@PathVariable int id, Model model) {
-        model.addAttribute("good", goodService.getById(id));
-        return "goods/goodPage";
+        model.addAttribute("product", productService.getById(id));
+        return "products/productPage";
     }
 
     @GetMapping("/addNew")
-    public String addNewP(@ModelAttribute("newGood") GoodEntity good) {
-        return "goods/addNew";
+    public String addNewP(@ModelAttribute("newProduct") ProductEntity product) {
+        return "products/addNew";
     }
 
     @PostMapping("/addNew")
-    public String addNew(@ModelAttribute("newGood") GoodEntity good) {
-        goodService.save(good);
+    public String addNew(@ModelAttribute("newProduct") ProductEntity product) {
+        productService.save(product);
         return "redirect:/stock";
     }
-
-
 }

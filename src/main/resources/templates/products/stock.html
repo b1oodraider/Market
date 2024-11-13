@@ -6,9 +6,9 @@
 </head>
 <body>
 
- <div th:each="good : ${goods}">
-   <a th:href="@{stock/{id}(id=${good.getId()})}"
-   th:text="${good.getGoods_name() + ', ' + good.getGoods_type() + ', ' + good.getGoods_in_stock()}"></a>
+ <div th:each="product : ${products}">
+   <a th:href="@{stock/{id}(id=${product.getId()})}"
+   th:text="${product.getProducts_name() + ', ' + product.getProducts_type() + ', ' + product.getProducts_in_stock()}"></a>
  </div>
 
  <div >

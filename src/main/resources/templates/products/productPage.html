@@ -6,9 +6,9 @@
 </head>
 <body>
 
-<p th:text="${good.getGoods_description()}"></p>
+<p th:text="${product.getProducts_description()}"></p>
 
-<form th:method="POST" th:action="@{{id}(id=${good.getId()})}" th:object="${good}">
+<form th:method="POST" th:action="@{{id}(id=${product.getId()})}" th:object="${product}">
     <input type="submit" value="Добавить в корзину">
 </form>
 

@@ -1,28 +1,23 @@
 package WebMarket.Market.DTO;
 
-import WebMarket.Market.models.GoodEntity;
+import WebMarket.Market.models.DBCartEntity;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name="carts")
-public class DBCartDTO {
+@Getter
+@Setter
+public class DBCartDTO extends DBCartEntity {
 
-    @Id
-    @Column(name = "user_id")
-    private int userId;
-    @Column(name="good_id")
-    private int goodId;
-    @Column(name="good_count")
-    private int goodCount;
+    public DBCartDTO(long userId, long productId, int productCount, String productsName) {
+        super(userId, productId, productCount);
+        this.productsName = productsName;
+    }
+
+    @Column(insertable=false, updatable=false)
+    private String productsName;
 }

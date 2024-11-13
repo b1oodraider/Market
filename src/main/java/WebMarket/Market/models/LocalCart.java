@@ -1,6 +1,6 @@
 package WebMarket.Market.models;
 
-import WebMarket.Market.repositories.GoodsRepository;
+import WebMarket.Market.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,30 +18,26 @@ import java.util.Map;
 public class LocalCart {
     private Map<String, CartNode> cart = new HashMap<>();
 
-    private final GoodsRepository goodsRepository;
+    private final ProductRepository productRepository;
 
-    public LocalCart(GoodsRepository goodsRepository) {
-        this.goodsRepository = goodsRepository;
+    public LocalCart(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    public void add(GoodEntity good, int count) {
-        int temp = count;
-        if(cart.containsKey(good.getGoods_name())) {
-            temp += cart.get(good.getGoods_name()).getCount();
-        }
-        cart.put(good.getGoods_name(), new CartNode(good, temp));
+    public void add(ProductEntity product) {
+        cart.put(product.getProducts_name(), new CartNode(product, 1));
     }
 
     public void changeCount(int id, int count) {
-        GoodEntity good = goodsRepository.findById(id).get();
-        cart.put(good.getGoods_name(), new CartNode(good, count));
+        ProductEntity product = productRepository.findById(id).get();
+        cart.put(product.getProducts_name(), new CartNode(product, count));
     }
 
     public void removeOne(int id) {
-        cart.remove(goodsRepository.findById(id).get().getGoods_name());
+        cart.remove(productRepository.findById(id).get().getProducts_name());
     }
 
-    public void removeAll() {
+    public void clearCart() {
         cart.clear();
     }
 }
@@ -51,6 +47,6 @@ public class LocalCart {
 @AllArgsConstructor
 @NoArgsConstructor
 class CartNode {
-    private GoodEntity good;
+    private ProductEntity product;
     private int count;
 }

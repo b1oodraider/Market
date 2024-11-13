@@ -5,7 +5,7 @@
     <title>Добавление товара</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{addNew}" th:object="${newGood}">
+<form th:method="POST" th:action="@{addNew}" th:object="${newProduct}">
     <label for="good_name"> Введите название продукта</label>
     <input type="text" th:field="*{goods_name}" id="good_name">
     <br/>
