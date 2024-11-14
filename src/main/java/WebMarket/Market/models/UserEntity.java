@@ -4,11 +4,15 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="users")
 public class UserEntity {
@@ -35,15 +39,5 @@ public class UserEntity {
 
     @Column(name="role")
     private String role;
-
-    public UserEntity() {}
-
-    public UserEntity(String username, String password, String email, String phoneNumber, String role) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.role = role;
-    }
 
 }

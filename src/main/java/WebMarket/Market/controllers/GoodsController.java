@@ -35,6 +35,6 @@ public class  GoodsController {
     @PostMapping("/addNew")
     public String addNew(@ModelAttribute("newProduct") ProductEntity product) {
         productService.save(product);
-        return "redirect:/stock";
+        return "redirect:/stock/addNew";
     }
 }

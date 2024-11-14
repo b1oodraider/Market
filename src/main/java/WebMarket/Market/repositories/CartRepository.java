@@ -16,11 +16,6 @@ public interface CartRepository extends JpaRepository<DBCartEntity, Integer> {
     )
     List<DBCartDTO> findByUserId(int id);
 
-
-    DBCartEntity findByUserIdAndProductId(long userId, long productsId);
-
-    boolean existsByUserIdAndProductId(long id, long productId);
-
     void deleteAllByUserIdAndProductId(long id, long productId);
 
     void deleteAllByUserId(long id);

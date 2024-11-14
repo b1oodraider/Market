@@ -3,7 +3,6 @@ package WebMarket.Market.services;
 import WebMarket.Market.DTO.DBCartDTO;
 import WebMarket.Market.models.DBCartEntity;
 import WebMarket.Market.repositories.CartRepository;
-import WebMarket.Market.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +11,9 @@ import java.util.List;
 @Service
 public class CartService {
     private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
 
-    public CartService(CartRepository cartRepository, ProductRepository productRepository) {
+    public CartService(CartRepository cartRepository) {
         this.cartRepository = cartRepository;
-        this.productRepository = productRepository;
     }
 
     @Transactional

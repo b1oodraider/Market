@@ -1,7 +1,6 @@
 package WebMarket.Market.controllers;
 
 import WebMarket.Market.DTO.DBCartDTO;
-import WebMarket.Market.models.DBCartEntity;
 import WebMarket.Market.models.ProductEntity;
 import WebMarket.Market.models.LocalCart;
 import WebMarket.Market.security.UsersDetails;
